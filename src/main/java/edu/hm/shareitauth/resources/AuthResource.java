@@ -1,5 +1,6 @@
 package edu.hm.shareitauth.resources;
 
+import edu.hm.shareitauth.model.Token;
 import edu.hm.shareitauth.model.User;
 
 import javax.ws.rs.*;
@@ -33,10 +34,10 @@ private static final String cookieName = "accessToken";
     @Path("/valid")
     @Produces("application/json")
     @Consumes("application/json")
-    public Response getJWT(@CookieParam(cookieName) String value){
+    public Response getJWT(Token token){
         return Response
                 .status(Response.Status.OK)
-                .entity("{\"message\":\""+value+"\"}")
+                //.entity("{\"message\":\""+value+"\"}")
                 //.cookie(new NewCookie(cookieName,value))
                 .build();
     }

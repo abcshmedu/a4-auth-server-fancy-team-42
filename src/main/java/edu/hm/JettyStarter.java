@@ -1,7 +1,12 @@
 package edu.hm;
 
+import edu.hm.shareitauth.model.Token;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.webapp.*;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.UUID;
 
 /**
  * Start the application without an AppServer like tomcat.
@@ -20,11 +25,17 @@ public class JettyStarter {
      * @throws Exception might throw for several reasons.
      */
     public static void main(String... args) throws Exception {
-        Server jetty = new Server(PORT);
+        /*Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();
         System.out.println("Jetty listening on port " + PORT);
         jetty.join();
+        */
+        SecureRandom random = new SecureRandom();
+        String s = new BigInteger(130,random).toString(32);
+        Token t = new Token();
+        System.out.println(t.getToken());
+        System.out.println(s);
     }
 
 }

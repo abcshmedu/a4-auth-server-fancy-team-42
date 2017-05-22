@@ -1,7 +1,7 @@
 package edu.hm.shareitauth.model;
 
 /**
- * Created by markus on 15.05.17.
+ * Class that represents the user. Every user has a name and a password, every user must have a different name.
  */
 public class User {
 
@@ -21,7 +21,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        String tmp = this.getName() + "|" + this.getPassword();
+        String tmp = this.getName()+this.getPassword();
         return tmp.hashCode();
     }
 
