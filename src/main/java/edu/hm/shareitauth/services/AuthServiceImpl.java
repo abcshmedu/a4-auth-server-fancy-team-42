@@ -24,8 +24,15 @@ public class AuthServiceImpl implements IAuthService {
     public static String fail = "0";
 
     //Token is valid for 12 minutes
-    private static double expireTime = 12*60*100;
+    private static double expireTime = 12*60*1000;
 
+    public AuthServiceImpl(){
+        UserData.add(new User("markus","123456789"));
+        UserData.add(new User("peter","12345"));
+
+        UserProfiles.put(new User("markus","123456789"),new Profile(true,"eng","no-ads, sort after date"));
+        UserProfiles.put(new User("peter","12345"),new Profile(true,"deu","ads, sort after size"));
+    }
 
     @Override
     public String getToken(User user) {

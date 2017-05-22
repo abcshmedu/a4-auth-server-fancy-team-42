@@ -43,7 +43,7 @@ private static final String cookieName = "accessToken";
         }
     }
 
-    @GET
+    @POST
     @Path("/valid")
     @Produces("application/json")
     @Consumes("application/json")
