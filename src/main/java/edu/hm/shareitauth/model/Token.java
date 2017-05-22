@@ -33,4 +33,14 @@ public class Token {
         }
         return token.getToken().equals(this.getToken());
     }
+
+    @Override
+    public String toString() {
+        return this.getToken();
+    }
+
+    @Override
+    public int hashCode() {
+        return token.hashCode();
+    }
 }

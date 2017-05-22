@@ -31,11 +31,9 @@ public class JettyStarter {
         System.out.println("Jetty listening on port " + PORT);
         jetty.join();
         */
-        SecureRandom random = new SecureRandom();
-        String s = new BigInteger(130,random).toString(32);
-        Token t = new Token();
-        System.out.println(t.getToken());
-        System.out.println(s);
+        System.out.println(System.currentTimeMillis());
+        Thread.sleep(1000);
+        System.out.println(System.currentTimeMillis());
     }
 
 }
