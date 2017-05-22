@@ -37,8 +37,7 @@ private static final String cookieName = "accessToken";
         else {
             return Response
                     .status(Response.Status.OK)
-                    .entity("{\"message\":\"Login successful!\"}")
-                    .cookie(new NewCookie(cookieName,token))
+                    .entity("{\"token\":\""+token+"\"}")
                     .build();
         }
     }
