@@ -21,7 +21,6 @@ public class AuthResource {
         authService = new AuthServiceImpl();
     }
 
-private static final String cookieName = "accessToken";
     @POST
     @Path("/user")
     @Produces("application/json")
@@ -30,7 +29,7 @@ private static final String cookieName = "accessToken";
         String token = authService.getToken(user);
         if(token.equals(AuthServiceImpl.fail)){
             return Response
-                    .status(Response.Status.OK)
+                    .status(Response.Status.BAD_REQUEST)
                     .entity("{\"message\":\"Login failed!\"}")
                     .build();
         }
