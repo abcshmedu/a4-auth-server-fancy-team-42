@@ -7,17 +7,27 @@ import java.security.SecureRandom;
  * Class that represents the token.
  */
 public class Token {
+
+    private static final  int RANDOM_BITS = 130;
+    private static final  int STRING_BITS = 32;
+
     private String token;
-    private final static int randomBits = 130;
-    private final static int stringBits = 32;
 
 
-    public Token () {
+
+    /**
+     * Constructor that generates a random and secure stable token.
+     */
+    public Token() {
         SecureRandom random = new SecureRandom();
-        this.token = new BigInteger(randomBits,random).toString(stringBits);
+        this.token = new BigInteger(RANDOM_BITS, random).toString(STRING_BITS);
     }
 
-    public String getToken(){
+    /**
+     * Getter for the token.
+     * @return token as string
+     */
+    public String getToken() {
         return this.token;
     }
 
@@ -25,10 +35,10 @@ public class Token {
     public boolean equals(Object obj) {
 
         Token token = null;
-        try{
+        try {
             token = (Token) obj;
         }
-        catch (ClassCastException ex){
+        catch (ClassCastException ex) {
             return false;
         }
         return token.getToken().equals(this.getToken());

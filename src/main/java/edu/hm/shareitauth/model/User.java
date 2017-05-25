@@ -10,38 +10,54 @@ public class User {
 
     @Override
     public boolean equals(Object obj) {
-        try{
+        try {
             User other = (User) obj;
             return other.getName().equals(this.getName()) && other.getPassword().equals(this.getPassword());
         }
-        catch (ClassCastException ex){
+        catch (ClassCastException ex) {
             return false;
         }
     }
 
     @Override
     public int hashCode() {
-        String tmp = this.getName()+this.getPassword();
+        String tmp = this.getName() + this.getPassword();
         return tmp.hashCode();
     }
 
-    public User(String name, String pw){
+    /**
+     * Constructor that creates a new user.
+     * @param name name of the user
+     * @param pw password of the user
+     */
+    public User(String name, String pw) {
         this.name = name;
         this.password = pw;
     }
 
-    public User(){}
+    /**
+     * Empty constructor necessary for Jackson-Framework.
+     */
+    public User() { }
 
     @Override
     public String toString() {
-        return "User: "+this.getName() + "||Password: " + this.getPassword();
+        return "User: " + this.getName() + "||Password: " + this.getPassword();
     }
 
-    public String getPassword(){
+    /**
+     * Getter for the user password.
+     * @return password as string.
+     */
+    public String getPassword() {
         return this.password;
     }
 
-    public String getName(){
+    /**
+     * Getter for the user-name.
+     * @return name as string.
+     */
+    public String getName() {
         return this.name;
     }
 

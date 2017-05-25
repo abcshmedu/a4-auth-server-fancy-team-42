@@ -12,35 +12,38 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by markus on 22.05.17.
+ * Auth-service that contains the core data of the service. Uses maps to save user-data and log in information.
  */
 public class AuthServiceImpl implements IAuthService {
 
-    private static List<User> UserData = new LinkedList<>();
-    private static Map<Token,User> AccesList = new HashMap<>();
-    private static Map<Token,Double> ExpireList = new HashMap<>();
-    private static Map<User,Profile> UserProfiles = new HashMap<>();
+    private static List<User> userList = new LinkedList<>();
+    private static Map<Token, User> accessList = new HashMap<>();
+    private static Map<Token, Double> expireList = new HashMap<>();
+    private static Map<User, Profile> userProfiles = new HashMap<>();
 
-    public static String fail = "0";
+    private static String fail = "0";
 
     //Token is valid for 12 minutes
-    private static double expireTime = 12*60*1000;
+    private static final double EXPIRE_TIME = 12 * 60 * 1000;
 
-    public AuthServiceImpl(){
-        UserData.add(new User("markus","123456789"));
-        UserData.add(new User("peter","12345"));
+    /**
+     * Constructor that creates the aut-service, with a few test users.
+     */
+    public AuthServiceImpl() {
+        userList.add(new User("markus", "123456789"));
+        userList.add(new User("peter", "12345"));
 
-        UserProfiles.put(new User("markus","123456789"),new Profile(true,"eng","no-ads, sort after date"));
-        UserProfiles.put(new User("peter","12345"),new Profile(true,"deu","ads, sort after size"));
+        userProfiles.put(new User("markus", "123456789"), new Profile(true, "eng", "no-ads, sort after date"));
+        userProfiles.put(new User("peter", "12345"), new Profile(true, "deu", "ads, sort after size"));
     }
 
     @Override
     public String getToken(User user) {
-        if(UserData.contains(user)) {
+        if (userList.contains(user)) {
             Token token = new Token();
             double time = System.currentTimeMillis();
-            AccesList.put(token, user);
-            ExpireList.put(token,time);
+            accessList.put(token, user);
+            expireList.put(token, time);
             return token.getToken();
         }
         return fail;
@@ -51,12 +54,12 @@ public class AuthServiceImpl implements IAuthService {
         String res = "";
         User user;
         double time = System.currentTimeMillis();
-        if(AccesList.containsKey(token)){
-            user = AccesList.get(token);
-            if (ExpireList.containsKey(token)){
-                double oldTime = ExpireList.get(token);
-                if(Math.abs(time-oldTime)<expireTime){
-                    Profile p = UserProfiles.get(user);
+        if (accessList.containsKey(token)) {
+            user = accessList.get(token);
+            if (expireList.containsKey(token)) {
+                double oldTime = expireList.get(token);
+                if (Math.abs(time - oldTime) < EXPIRE_TIME) {
+                    Profile p = userProfiles.get(user);
                     ObjectMapper mapper = new ObjectMapper();
                     try {
                         res = mapper.writeValueAsString(p);
@@ -66,13 +69,13 @@ public class AuthServiceImpl implements IAuthService {
 
                 }
                 else {
-                    ExpireList.remove(token);
-                    AccesList.remove(token);
+                    expireList.remove(token);
+                    accessList.remove(token);
                     res = "{\"message\":\"old token.\"}";
                 }
             }
             else {
-                AccesList.remove(token);
+                accessList.remove(token);
                 res = "{\"message\":\"token has no time stamp.\"}";
             }
         }
@@ -80,5 +83,13 @@ public class AuthServiceImpl implements IAuthService {
             res = "{\"message\":\"token is wrong.\"}";
         }
         return res;
+    }
+
+    /**
+     * Getter that returns fail-code.
+     * @return fail-code
+     */
+    public static String getFail() {
+        return fail;
     }
 }
