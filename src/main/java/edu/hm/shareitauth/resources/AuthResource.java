@@ -1,7 +1,7 @@
 package edu.hm.shareitauth.resources;
 
-import edu.hm.shareitauth.model.Token;
-import edu.hm.shareitauth.model.User;
+import edu.hm.shareitauth.models.Token;
+import edu.hm.shareitauth.models.User;
 import edu.hm.shareitauth.services.AuthServiceImpl;
 import edu.hm.shareitauth.services.IAuthService;
 
@@ -34,7 +34,7 @@ public class AuthResource {
     @Consumes("application/json")
     public Response getToken(User user) {
         String token = authService.getToken(user);
-        if (token.equals(AuthServiceImpl.fail)) {
+        if (token.equals(AuthServiceImpl.getFail())) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity("{\"message\":\"Login failed!\"}")

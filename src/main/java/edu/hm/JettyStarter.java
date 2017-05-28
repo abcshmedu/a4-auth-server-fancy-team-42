@@ -1,6 +1,7 @@
 package edu.hm;
 
-import edu.hm.shareitauth.model.Token;
+import edu.hm.shareitauth.models.Token;
+
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.webapp.*;
 

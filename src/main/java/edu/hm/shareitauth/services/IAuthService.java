@@ -1,7 +1,7 @@
 package edu.hm.shareitauth.services;
 
-import edu.hm.shareitauth.model.Token;
-import edu.hm.shareitauth.model.User;
+import edu.hm.shareitauth.models.Token;
+import edu.hm.shareitauth.models.User;
 
 /**
  * Interface that specifies the methods of the authservice.

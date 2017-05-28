@@ -2,9 +2,10 @@ package edu.hm.shareitauth.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.hm.shareitauth.model.Profile;
-import edu.hm.shareitauth.model.Token;
-import edu.hm.shareitauth.model.User;
+
+import edu.hm.shareitauth.models.Profile;
+import edu.hm.shareitauth.models.Token;
+import edu.hm.shareitauth.models.User;
 
 import java.util.HashMap;
 import java.util.LinkedList;
