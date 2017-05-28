@@ -34,7 +34,7 @@ public class AuthResource {
     @Consumes("application/json")
     public Response getToken(User user) {
         String token = authService.getToken(user);
-        if (token.equals(AuthServiceImpl.fail)) {
+        if (token.equals(AuthServiceImpl.getFail())) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity("{\"message\":\"Login failed!\"}")
