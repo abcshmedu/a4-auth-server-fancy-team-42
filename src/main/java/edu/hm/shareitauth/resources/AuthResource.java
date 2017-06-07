@@ -6,6 +6,7 @@ import edu.hm.shareitauth.services.AuthServiceImpl;
 import edu.hm.shareitauth.services.IAuthService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 /**
@@ -15,6 +16,10 @@ import javax.ws.rs.core.Response;
 public class AuthResource {
 
     private IAuthService authService;
+
+    private static final String CookieName = "Token";
+    private static final String CookieComment = "Cookie for authentication";
+    private static final int CookieAge = 12 * 60;
 
     /**
      * Constructor, a new auth-service implementation is defined.
@@ -43,7 +48,8 @@ public class AuthResource {
         else {
             return Response
                     .status(Response.Status.OK)
-                    .entity("{\"token\":\"" + token + "\"}")
+                    //.entity("{\"token\":\"" + token + "\"}")
+                    .cookie(new NewCookie(CookieName, token, "/", "", CookieComment, CookieAge, false))
                     .build();
         }
     }

@@ -24,9 +24,9 @@ var submitNewBook = function() {
             var template = "{{#data}}{{token}}{{/data}}";
             Mustache.parse(template);
             var output = Mustache.render(template, {data: data});
-            var now = new Date();
-            now.setTime(now.getTime() + 12 * 60 * 1000);
-            document.cookie = "token="+output+"; expires=" + now.toUTCString() + "; path=/";
+            //var now = new Date();
+            //now.setTime(now.getTime() + 12 * 60 * 1000);
+            //document.cookie = "token="+output+"; expires=" + now.toUTCString() + "; path=/";
 
         	//errorText.removeClass("visible");
         	//errorText.addClass("hidden");
@@ -77,7 +77,6 @@ var readCookie = function () {
     else{
         var splitList = cookie.split("=");
         var token = splitList[1];
-        alert(token);
         var json = JSON.stringify({
             token: token
         });
