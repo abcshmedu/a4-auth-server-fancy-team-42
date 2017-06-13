@@ -53,7 +53,7 @@ public class AuthResource {
             return Response
                     .status(Response.Status.OK)
                     .entity("{\"token\":\"" + token + "\"}")
-                    .cookie(new NewCookie(CookieName, token, "/", "share-it-fancy-team-42-media.herokuapp.com", version, CookieComment, CookieAge, date, false, false))
+                    .cookie(new NewCookie(CookieName, token, "/", "", version, CookieComment, CookieAge, date, false, false))
                     .build();
         }
     }
