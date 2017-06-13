@@ -58,7 +58,7 @@ public class AuthRessourceTest {
         os.flush();
         connection.getResponseCode();
 
-        //System.out.print(connection.getResponseMessage());
+
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String token = in.readLine();
         connection.disconnect();

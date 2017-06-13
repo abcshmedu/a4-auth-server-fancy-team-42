@@ -48,7 +48,7 @@ public class AuthResource {
         else {
             return Response
                     .status(Response.Status.OK)
-                    //.entity("{\"token\":\"" + token + "\"}")
+                    .entity("{\"token\":\"" + token + "\"}")
                     .cookie(new NewCookie(CookieName, token, "/", "", CookieComment, CookieAge, false))
                     .build();
         }
