@@ -18,6 +18,9 @@ public class AuthResource {
 
     private IAuthService authService;
 
+    /**
+     * Cookie information.
+     */
     private static final String CookieName = "Token";
     private static final String CookieComment = "Cookie for authentication";
     private static final int CookieAge = 12 * 60;
