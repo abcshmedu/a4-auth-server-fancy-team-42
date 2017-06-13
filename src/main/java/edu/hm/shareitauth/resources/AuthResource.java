@@ -8,6 +8,7 @@ import edu.hm.shareitauth.services.IAuthService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 
 /**
  * REST-API for authentication service.
@@ -20,6 +21,8 @@ public class AuthResource {
     private static final String CookieName = "Token";
     private static final String CookieComment = "Cookie for authentication";
     private static final int CookieAge = 12 * 60;
+    private static final int millis = 1000;
+    private static final int version = 1;
 
     /**
      * Constructor, a new auth-service implementation is defined.
@@ -46,10 +49,11 @@ public class AuthResource {
                     .build();
         }
         else {
+            Date date = new Date(System.currentTimeMillis() + (CookieAge * millis));
             return Response
                     .status(Response.Status.OK)
                     .entity("{\"token\":\"" + token + "\"}")
-                    .cookie(new NewCookie(CookieName, token, "/", "share-it-fancy-team-42-media.herokuapp.com", CookieComment, CookieAge, false))
+                    .cookie(new NewCookie(CookieName, token, "/", "share-it-fancy-team-42-media.herokuapp.com", version, CookieComment, CookieAge, date, false, false))
                     .build();
         }
     }
